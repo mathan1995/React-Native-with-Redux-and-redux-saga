@@ -66,7 +66,6 @@ class LandingScreen extends React.PureComponent {
         this.foodListCheck = false;
       }
     }
-
     const createResponse = nextProps.createFoodDataResponse;
     const createError = _.get(createResponse, "error", null);
     const createIsFetching = _.get(createResponse, "isFetching", false);
@@ -79,7 +78,6 @@ class LandingScreen extends React.PureComponent {
         this.setState({ foodName: "" });
       }
     }
-
     const deleteResponse = nextProps.deleteFoodItemResponse;
     const deleteError = _.get(deleteResponse, "error", null);
     const deleteIsFetching = _.get(deleteResponse, "isFetching", false);
@@ -92,7 +90,6 @@ class LandingScreen extends React.PureComponent {
       }
     }
   }
-
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -188,6 +185,7 @@ class LandingScreen extends React.PureComponent {
     }
   };
 
+  //User rendering the better configure pattern.
   _renderActivityIndicator = () => {
     if (this.state.showLoader) {
       return (
@@ -198,6 +196,7 @@ class LandingScreen extends React.PureComponent {
     }
   };
 
+  //Row rendering pattern
   renderRow = ({ item }) => {
     return (
       <FlatListItem
@@ -209,12 +208,14 @@ class LandingScreen extends React.PureComponent {
     );
   };
 
+  //Onpress for the key delete
   onPressDeleteItem = item => {
     this.setState({ showLoader: true });
     this.deleteItemCheck = true;
     this.props.deleteFoodItem(item.foodId);
   };
 
+  //Create button on the new button fix
   onPressCreateButton = () => {
     let alphabetRejex = /^[a-zA-Z\s]*$/;
     const { foodName } = this.state;
@@ -233,7 +234,6 @@ class LandingScreen extends React.PureComponent {
     };
     this.props.createFoodItem(payload);
   };
-
   fetchDataOnRefresh = () => {
     this.setState({ refreshing: true }, () => {
       this.foodListCheck = true;
